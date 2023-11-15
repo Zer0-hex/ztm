@@ -1,0 +1,48 @@
+# Profile Author: Zer0-hex
+RootPath = "/opt/ztk"
+
+[[res]]
+Tag = "shareApp"
+Action = "download"
+
+[[res.sub]]
+Name = "Peass-ng"
+Url = "https://github.com/carlospolop/PEASS-ng/releases/latest"
+Files = [
+    "linpeas.sh",
+    "linpeas_darwin_amd64",
+    "linpeas_darwin_arm64",
+    "linpeas_fat.sh",
+    "linpeas_linux_386",
+    "linpeas_linux_amd64",
+    "linpeas_linux_arm",
+    "linpeas_linux_arm64",
+    "winPEAS.bat",
+    "winPEASany.exe",
+    "winPEASany_ofs.exe",
+    "winPEASx64.exe",
+    "winPEASx64_ofs.exe",
+    "winPEASx86.exe",
+    "winPEASx86_ofs.exe",
+]
+
+[[res.sub]]
+Name = "mimikatz"
+Url = "https://github.com/11111"
+Files = [
+    "linpeas.sh",
+]
+
+[[res]]
+tag = "webShell"
+Action = "git"
+
+[[res.sub]]
+Name = "BlackArch"
+Url = "https://github.com/BlackArch/webshells"
+Files = []
+
+[[res.sub]]
+Name = "Kali"
+Url = "https://github.com/kali"
+Files = []
