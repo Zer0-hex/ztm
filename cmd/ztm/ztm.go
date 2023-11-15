@@ -30,6 +30,6 @@ func main() {
 
 	err = ztm.Run()
 	if err != nil {
-		log.Fatal("Could not run pdtm: %s\n", err)
+		log.Fatalf("Could not run ztm: %s\n", err)
 	}
 }

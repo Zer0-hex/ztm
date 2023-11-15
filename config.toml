@@ -1,12 +1,7 @@
 # Profile Author: Zer0-hex
-RootPath = "/opt/ztk"
-
-[[res]]
-Tag = "shareApp"
-Action = "download"
-
-[[res.sub]]
+[[Tool]]
 Name = "Peass-ng"
+Tag = "shareApp"
 Url = "https://github.com/carlospolop/PEASS-ng/releases/latest"
 Files = [
     "linpeas.sh",
@@ -26,23 +21,22 @@ Files = [
     "winPEASx86_ofs.exe",
 ]
 
-[[res.sub]]
+[[Tool]]
 Name = "mimikatz"
+Tag = "shareApp"
 Url = "https://github.com/11111"
 Files = [
     "linpeas.sh",
 ]
 
-[[res]]
-tag = "webShell"
-Action = "git"
-
-[[res.sub]]
+[[Tool]]
 Name = "BlackArch"
+Tag = "webShell"
 Url = "https://github.com/BlackArch/webshells"
 Files = []
 
-[[res.sub]]
+[[Tool]]
 Name = "Kali"
+Tag = "webShell"
 Url = "https://github.com/kali"
 Files = []
