@@ -6,28 +6,29 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/Zer0-hex/ztm/internal/runner"
 )
 
 func main() {
-	var options Options
-	Flag(&options)
-	options := runner.ParseOptions()
-	pdtmRunner, err := runner.NewRunner(options)
+	// 初始化参数
+	ztm, err := runner.NewRunner(&runner.Options{})
 	if err != nil {
-		log.Fatal("Could not create runner: %s\n", err)
+		panic(err)
 	}
-	log.Fatal()
+	ztm.Flag()
+
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	// Setup close handler
 	go func() {
 		<-c
 		fmt.Println("\r- Ctrl+C pressed in Terminal, Exiting...")
-		pdtmRunner.Close()
+		//pdtmRunner.Close()
 		os.Exit(0)
 	}()
 
-	err = pdtmRunner.Run()
+	err = ztm.Run()
 	if err != nil {
 		log.Fatal("Could not run pdtm: %s\n", err)
 	}

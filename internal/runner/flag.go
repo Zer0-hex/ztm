@@ -19,13 +19,13 @@ var (
 		return home
 	}()
 
-	defaultConfigLocation = filepath.Join(homeDir, ".ztm/config.toml")
-	defaultPath           = filepath.Join(homeDir, ".ztm/resource")
+	defaultConfigPath = filepath.Join(homeDir, ".ztm/config.toml")
+	defaultResPath    = filepath.Join(homeDir, ".ztm/resource")
 )
 
 // Options contains the configuration options for tuning the enumeration process.
 type Options struct {
-	ConfigFile string
+	ConfigPath string
 	ResPath    string
 
 	Update  bool
@@ -48,10 +48,10 @@ func Banner() {
 	print(banner)
 }
 
-func Flag(options Options) {
+func Flag(options *Options) {
 	Banner()
-	flag.StringVar(&options.ConfigFile, "config", "", "配置文件路径")
-	flag.StringVar(&options.ResPath, "ResPath", "", "保存路径")
+	flag.StringVar(&options.ConfigPath, "config", "", "配置文件路径($HOME/.ztm/config.toml)")
+	flag.StringVar(&options.ResPath, "respath", "", "资源保存路径($HOME/.ztm/resources)")
 	flag.BoolVar(&options.Update, "update", false, "检查更新")
 	flag.BoolVar(&options.Install, "install", false, "安装")
 	flag.BoolVar(&options.Upgrade, "upgrade", false, "更新")
