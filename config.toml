@@ -20,23 +20,45 @@ Files = [
     "winPEASx86.exe",
     "winPEASx86_ofs.exe",
 ]
+Action = "cp DIRPATH TAG/NAME"
 
 [[Tool]]
 Name = "mimikatz"
 Tag = "shareApp"
-Url = "https://github.com/11111"
+Url = "https://github.com/gentilkiwi/mimikatz/releases/latest"
 Files = [
-    "linpeas.sh",
+    "mimikatz_trunk.7z",
 ]
+Action = "7z x FILEPATH -oTAG/NAME"
 
 [[Tool]]
-Name = "BlackArch"
-Tag = "webShell"
-Url = "https://github.com/BlackArch/webshells"
-Files = []
+Name = "nishang"
+Tag = "shareApp"
+Url = "https://github.com/samratashok/nishang/releases/latest"
+# https://github.com/samratashok/nishang/archive/refs/tags/v0.7.6.zip
+Files = ["master"]
+Action = "7z x FILEPATH -oTAG/NAME"
 
 [[Tool]]
-Name = "Kali"
-Tag = "webShell"
-Url = "https://github.com/kali"
-Files = []
+Name = "PowerSploit"
+Tag = "shareApp"
+Url = "https://github.com/PowerShellMafia/PowerSploit/releases/latest"
+Files = ["master"]
+Action = "7z x FILEPATH -oTAG/NAME"
+
+[[Tool]]
+Name = "Rubeus"
+Tag = "ADTool"
+Url = "https://github.com/GhostPack/Rubeus/releases/latest"
+Files = ["master"]
+Action = "7z x FILEPATH -oTAG/NAME"
+
+
+[[Tool]]
+Name = "SharpHound"
+Tag = "shareApp"
+Url = "https://github.com/BloodHoundAD/SharpHound/releases/latest"
+Files = [
+    "SharpHound-VERSION.zip",
+]
+Action = "7z x FILEPATH -oTAG/NAME"
