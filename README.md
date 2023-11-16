@@ -1,1 +1,3 @@
 # ztm
+
+Auto update tool
