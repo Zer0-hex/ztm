@@ -8,8 +8,7 @@ import argparse
 
 import tqdm
 import httpx
-# RootPath = "~/ztm/"
-RootPath = "."
+RootPath = "/home/zer0-hex/.ztm/"
 
 ConfigPath = os.path.join(RootPath, "config.toml")
 VersionInfoPath = os.path.join(RootPath, "cersion.list")
@@ -17,7 +16,7 @@ DownPath = os.path.join(RootPath, "downloads")
 
 PROXY = {
 
-    'all://': "http://127.0.0.1:10809",
+    'all://': "http://192.168.198.1:10809",
 
 }
 
@@ -48,8 +47,7 @@ def flag():
 
     banner()
 
-    parser = argparse.ArgumentParser(prog='ztk', description='Zer0-hex Tools Manager', epilog='更新工具',)
-
+    parser = argparse.ArgumentParser(prog='ztk', description='Zer0-hex Tools Manager')
     parser.add_argument('-d', '--down', action='store_true', default=False, help='重新下载所有软件')
 
     return parser.parse_args()
@@ -85,9 +83,8 @@ async def download(config: dict):
 
 
 def save(content: bytes, name: str, path: str):
-    print('[+] filePath', path)
     if not os.path.exists(path=path):
-        os.makedirs(path, mode=0o0644)
+        os.makedirs(path, mode=0o0755)
     filepath = path + '/' + name
     with open(filepath, 'wb') as f:
         f.write(content) 
@@ -119,7 +116,7 @@ async def syncVersion(config: dict):
 
         version = await getVersion(url=v['Url'])
 
-        print(f'[+] Get {v['Name']} Version: {version}')
+        print(f'[+] Get {v["Name"]} Version: {version}')
 
         v['Version'] = version
 
@@ -136,14 +133,14 @@ def getDownLink(config: dict):
 
                 i['Files'][index] = i['Name']
 
-                link = i['Url'].replace('releases/latest', f'archive/refs/tags/{i['Version']}.zip')
+                link = i['Url'].replace('releases/latest', f'archive/refs/tags/{i["Version"]}.zip')
 
                 i['Link'].append(link)
             else:
 
                 i['Files'][index] = j.replace('VERSION', i['Version'])
 
-                link = i['Url'].replace('latest', f'download/{i['Version']}/{i['Files'][index]}')
+                link = i['Url'].replace('latest', f'download/{i["Version"]}/{i["Files"][index]}')
 
                 i['Link'].append(link)
 
@@ -152,25 +149,26 @@ def action(config: dict):
     for i in config['Tool']:
         tag = i['Tag']
         path = os.path.join(RootPath, tag)
-        if not os.path.exists(path=tag):
+        if not os.path.exists(path=path):
             os.makedirs(path, mode=0o0755)
         dirpath = os.path.join(DownPath,  i['Name'])
         for j in i['Files']:
             filepath = os.path.join(dirpath, j)
             action = i['Action'].replace('DIRPATH', dirpath).replace('TAG', tag).replace("FILEPATH", filepath).replace("FILENAME", j).replace("NAME", i['Name'])
-            # os.system(action)
+            print('[+]', action)
+            os.system(action)
+
+def check():
+    pass
 
 def main():
     args = flag()
-
     config = loadConfig(ConfigPath)
-
     asyncio.run(syncVersion(config=config))
-
+    if args.down:
+        check(config)
     getDownLink(config=config)
-
-    # asyncio.run(download(config=config))
-
+    asyncio.run(download(config=config))
     action(config)
 
 main()
