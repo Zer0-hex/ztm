@@ -44,7 +44,7 @@ Name = "PowerSploit"
 Tag = "shareApp"
 Url = "https://github.com/PowerShellMafia/PowerSploit/releases/latest"
 Files = ["master"]
-Action = "7z x FILEPATH -oTAG/NAME"
+Action = "7z e FILEPATH -oTAG/NAME"
 
 [[Tool]]
 Name = "Rubeus"
